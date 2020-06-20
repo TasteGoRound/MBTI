@@ -24,6 +24,10 @@ export default {
 </script>
 
 <style>
+  .pagination {
+    width: calc(100vw - 100px);
+  }
+
   .progress-background {
     background-color: #f7f7f7;
     border-radius: 10px;

@@ -5,12 +5,10 @@
         <li class="item" v-for="(interview, index) in questions" :key="index">
           <em class="number">Q{{index + 1}}</em>
           <strong class="question">{{ interview.question }}</strong>
-          <template v-for="(option, optionIndex) in interview.answerOptions">
-            <div :key="optionIndex">
-              <input type="radio" :id="`Q${index + 1}_${optionIndex}`" :name="`Q${index + 1}`" :value="option.value" v-model="responses[index]">
-              <label class="answer" :for="`Q${index + 1}_${optionIndex}`">{{ option.answer }}</label>
-            </div>
-          </template>
+          <div v-for="(option, optionIndex) in interview.answerOptions" :key="optionIndex">
+            <input type="radio" :id="`Q${index + 1}_${optionIndex}`" :name="`Q${index + 1}`" :value="option.value" v-model="responses[index]">
+            <label class="answer" :for="`Q${index + 1}_${optionIndex}`">{{ option.answer }}</label>
+          </div>
         </li>
       </ul>
       <Pagination :currentInterviewNumber="responseInterviewCount" :interviewCount="questions.length" />
@@ -64,7 +62,9 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  max-width: 600px;
   padding: 0 30px;
+  margin: 0 auto;
 }
 
 .viewport {
@@ -86,4 +86,18 @@ export default {
     flex-shrink: 0;
   }
 }
+
+.number {
+  display: block;
+  text-align: center;
+  font-size: 50px;
+}
+
+.question {
+  display: block;
+  text-decoration: underline;
+  text-align: center;
+}
+
+
 </style>

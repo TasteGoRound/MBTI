@@ -1,20 +1,18 @@
 <template>
   <div class="container">
-    <div class="interview">
-      <div class="viewport">
-        <ul>
-          <li v-for="(interview, index) in questions" :key="index">
-            <em class="number">Q{{index + 1}}</em>
-            <strong class="question">{{ interview.question }}</strong>
-            <template v-for="(option, optionIndex) in interview.answerOptions">
-              <div :key="optionIndex">
-                <input type="radio" :id="`Q${index + 1}_${optionIndex}`" :name="`Q${index + 1}`" :value="option.value" v-model="responses[index]">
-                <label class="answer" :for="`Q${index + 1}_${optionIndex}`">{{ option.answer }}</label>
-              </div>
-            </template>
-          </li>
-        </ul>
-      </div>
+    <div class="viewport" ref="viewport">
+      <ul class="interview" :style="transformQuestionItem">
+        <li class="item" v-for="(interview, index) in questions" :key="index">
+          <em class="number">Q{{index + 1}}</em>
+          <strong class="question">{{ interview.question }}</strong>
+          <template v-for="(option, optionIndex) in interview.answerOptions">
+            <div :key="optionIndex">
+              <input type="radio" :id="`Q${index + 1}_${optionIndex}`" :name="`Q${index + 1}`" :value="option.value" v-model="responses[index]">
+              <label class="answer" :for="`Q${index + 1}_${optionIndex}`">{{ option.answer }}</label>
+            </div>
+          </template>
+        </li>
+      </ul>
       <Pagination :currentInterviewNumber="responseInterviewCount" :interviewCount="questions.length" />
       <nuxt-link to="/loading">결과보기</nuxt-link>
     </div>
@@ -33,7 +31,8 @@ export default {
   data() {
     return {
       responses: [],
-      questions: MBTI.questions
+      questions: MBTI.questions,
+      viewport: null
     }
   },
   computed: {
@@ -41,79 +40,50 @@ export default {
       let count = this.responses.filter(answer => answer).length + 1
       count = count > this.questions.length ? this.questions.length : count
       return count;
+    },
+    transformQuestionItem() {
+      if (!this.viewport) { return { transform: 'translate3d(0px, 0px, 0px)' } }
+      const calculatedTransform = (this.responseInterviewCount - 1) * this.viewport.width;
+      return { transform: `translate3d(-${calculatedTransform}px, 0px, 0px)`}
     }
+  },
+  mounted() {
+    this.viewport = this.$refs.viewport.getBoundingClientRect();
+    window.addEventListener('resize', this.resizeEvent);
+  },
+  methods: {
+    resizeEvent() {
+      this.viewport = this.$refs.viewport.getBoundingClientRect()
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeEvent);
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .container {
-  min-width: 320px;
-  max-width: 600px;
-  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.viewport {
+  overflow: hidden;
 }
 
 .interview {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  width: 100%;
+  min-width: 100%;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
+  transition-duration: 300ms;
+  transform: translate3d(0px, 0px, 0px);
 
-.viewport {
-  width: calc(100vw - 80px);
-  overflow: hidden;
-}
-
-ul {
-  width: inherit;
-  margin-left: 0px;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  transition: margin-left 0.35s ease-out 0s;
-}
-
-li {
-  width: inherit;
-  display: flex;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-direction: column;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-.number {
-  display: block;
-  color: red;
-  font-weight: 900;
-  font-size: 25px;
-}
-
-.question {
-  display: block;
-  font-size: 20px;
-  font-weight: 700;
-  margin: 20px 0 20px 0;
-}
-
-.answer {
-  display: block;
-  padding: 10px 20px;
-  margin: 10px 0;
-  border: 1px solid grey;
-  border-radius: 10px;
-}
-
-.answer:hover {
-  background-color: rebeccapurple;
-}
-
-input[type=radio] {
-  display: none;
-}
-
-input[type=radio]:checked + label {
-  background-color:rebeccapurple;
+  .item {
+    width: 100%;
+    min-width: 100%;
+    flex-shrink: 0;
+  }
 }
 </style>

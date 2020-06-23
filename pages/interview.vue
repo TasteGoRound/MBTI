@@ -2,12 +2,32 @@
   <div class="container">
     <div class="viewport" ref="viewport">
       <ul class="interview" :style="transformQuestionItem">
-        <li class="item" v-for="(interview, index) in questions" :key="index">
-          <em class="number">Q{{index + 1}}</em>
-          <strong class="question">{{ interview.question }}</strong>
-          <div v-for="(option, optionIndex) in interview.answerOptions" :key="optionIndex">
-            <input type="radio" :id="`Q${index + 1}_${optionIndex}`" :name="`Q${index + 1}`" :value="option.value" v-model="responses[index]">
-            <label class="answer" :for="`Q${index + 1}_${optionIndex}`">{{ option.answer }}</label>
+        <li class="item" v-for="(question, index) in questions" :key="index">
+          <div class="item-bag">
+            <em class="number">Q.{{index + 1}}</em>
+            <div class="question-bag">
+              <strong class="question">{{ question }}</strong>
+            </div>
+            <div class="answer-bag">
+              <input
+                type="radio"
+                v-model="responses[index]"
+                :id="`Q${index + 1}_O`"
+                :name="`Q${index + 1}`"
+                value="O">
+                <label
+                  class="answer"
+                  :for="`Q${index + 1}_O`">O</label>
+              <input
+                type="radio"
+                v-model="responses[index]"
+                :id="`Q${index + 1}_X`"
+                :name="`Q${index + 1}`"
+                value="X">
+                <label
+                  class="answer"
+                  :for="`Q${index + 1}_X`">X</label>
+            </div>
           </div>
         </li>
       </ul>
@@ -18,9 +38,8 @@
 </template>
 
 <script>
+import SEX from '@/components/SEX.json'
 import Pagination from '@/components/Pagination.vue'
-
-import MBTI from '@/components/MBTI.json'
 
 export default {
   components: {
@@ -29,7 +48,7 @@ export default {
   data() {
     return {
       responses: [],
-      questions: MBTI.questions,
+      questions: SEX.questions,
       viewport: null
     }
   },
@@ -65,6 +84,8 @@ export default {
   max-width: 600px;
   padding: 0 30px;
   margin: 0 auto;
+  font-size: 1.5rem;
+  --main-point-color: rgb(188, 0, 0);
 }
 
 .viewport {
@@ -79,11 +100,14 @@ export default {
   transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
   transition-duration: 300ms;
   transform: translate3d(0px, 0px, 0px);
+}
 
-  .item {
-    width: 100%;
-    min-width: 100%;
-    flex-shrink: 0;
+.item {
+  width: 100%;
+  min-width: 100%;
+  flex-shrink: 0;
+  .item-bag {
+    padding: 0 20px;
   }
 }
 
@@ -91,13 +115,44 @@ export default {
   display: block;
   text-align: center;
   font-size: 50px;
+  color: var(--main-point-color);
 }
 
-.question {
-  display: block;
-  text-decoration: underline;
+.question-bag {
   text-align: center;
 }
 
+.question {
+  padding-bottom: 3px;
+  border-bottom: 2px solid #efefef;
+  line-height: 35px;
+}
 
+.answer-bag {
+  display: flex;
+  justify-content: center;
+}
+
+.answer {
+  display: block;
+  padding: 20px;
+  margin: 15px;
+  border: 1px solid var(--main-point-color);
+  color: var(--main-point-color);
+  font-size: 2rem;
+  border-radius: 10px;
+  &:hover {
+    background-color: var(--main-point-color);
+    color: #fff;
+  }
+}
+
+input[type=radio] {
+  display: none;
+}
+
+input[type=radio]:checked + .answer {
+  background-color: var(--main-point-color);
+  color: #fff;
+}
 </style>

@@ -25,7 +25,7 @@ export default {
 
 <style>
   .pagination {
-    width: 100%;
+    padding: 0 20px;
   }
 
   .progress-background {

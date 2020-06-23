@@ -6,7 +6,9 @@
           <div class="item-bag">
             <em class="number">Q.{{index + 1}}</em>
             <div class="question-bag">
-              <strong class="question">{{ question }}</strong>
+              <div class="question-pocket">
+                <strong class="question">{{ question }}</strong>
+              </div>
             </div>
             <div class="answer-bag">
               <input
@@ -32,7 +34,6 @@
         </li>
       </ul>
       <Pagination :currentInterviewNumber="responseInterviewCount" :interviewCount="questions.length" />
-      <nuxt-link to="/loading">결과보기</nuxt-link>
     </div>
   </div>
 </template>
@@ -81,10 +82,13 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  display: flex;
+  align-items: center;
+  height: inherit;
   max-width: 600px;
   padding: 0 30px;
-  margin: 0 auto;
-  font-size: 1.5rem;
+  margin: auto auto;
+  font-size: 1.2rem;
   --main-point-color: rgb(188, 0, 0);
 }
 
@@ -119,7 +123,17 @@ export default {
 }
 
 .question-bag {
+  position: relative;
   text-align: center;
+  margin-top: 5vh;
+  min-height: 25vh;
+}
+
+.question-pocket {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .question {
@@ -131,16 +145,19 @@ export default {
 .answer-bag {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
+  transition: all 1s ease-out;
 }
 
 .answer {
   display: block;
-  padding: 20px;
+  padding: 20px 30px;
   margin: 15px;
   border: 1px solid var(--main-point-color);
   color: var(--main-point-color);
   font-size: 2rem;
   border-radius: 10px;
+  background-color: #fdfdfd;
   &:hover {
     background-color: var(--main-point-color);
     color: #fff;

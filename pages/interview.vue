@@ -33,7 +33,10 @@
           </div>
         </li>
       </ul>
-      <Pagination :currentInterviewNumber="responseInterviewCount" :interviewCount="questions.length" />
+      <pagination
+        :responses="responses"
+        :currentInterviewNumber="responseInterviewCount"
+        :interviewCount="questions.length" />
     </div>
   </div>
 </template>
@@ -126,7 +129,8 @@ export default {
   position: relative;
   text-align: center;
   margin-top: 5vh;
-  min-height: 25vh;
+  height: 25vh;
+  max-height: 140px;
 }
 
 .question-pocket {

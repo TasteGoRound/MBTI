@@ -1,3 +1,11 @@
+let router = null;
+
+if(process.env.npm_config_publish) {
+  router = {
+    base: '/MBTI/'
+  }
+}
+
 
 export default {
   mode: 'spa',
@@ -12,5 +20,6 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  css: [ '@/assets/reset.css' ]
+  css: [ '@/assets/reset.css' ],
+  ...router
 }

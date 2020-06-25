@@ -1,8 +1,10 @@
-let router = null;
+let publish = null;
 
 if(process.env.npm_config_publish) {
-  router = {
-    base: '/MBTI/'
+  publish = {
+    router: {
+      base: '/MBTI/'
+    }
   }
 }
 
@@ -21,5 +23,5 @@ export default {
     ]
   },
   css: [ '@/assets/reset.css' ],
-  ...router
+  ...publish
 }

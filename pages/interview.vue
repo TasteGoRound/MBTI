@@ -6,9 +6,7 @@
           <div class="item-bag">
             <em class="number">Q.{{index + 1}}</em>
             <div class="question-bag">
-              <div class="question-pocket">
-                <strong class="question">{{ question }}</strong>
-              </div>
+              <strong class="question">{{ question }}</strong>
             </div>
             <div class="answer-bag">
               <input
@@ -128,17 +126,12 @@ export default {
 .question-bag {
   position: relative;
   text-align: center;
-  margin-top: 5vh;
-  height: 25vh;
-  max-height: 140px;
+  margin-top: 3vh;
+  height: 30vh;
+  max-height: 220px;
 }
 
-.question-pocket {
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
+.question-pocket {}
 
 .question {
   padding-bottom: 3px;

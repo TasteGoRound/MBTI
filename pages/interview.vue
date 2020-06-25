@@ -83,6 +83,7 @@ export default {
   transition-property: transform;
   transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
   transition-duration: 300ms;
+  transition-delay: 0.5s;
   transform: translate3d(0px, 0px, 0px);
 }
 

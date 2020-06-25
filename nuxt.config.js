@@ -9,6 +9,7 @@ if(process.env.npm_config_publish) {
 
 export default {
   mode: 'spa',
+  env: '/MBTI/',
   head: {
     title: process.env.npm_package_name || '',
     meta: [

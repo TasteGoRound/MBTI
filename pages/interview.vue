@@ -1,41 +1,31 @@
 <template>
-  <div class="container">
-    <div class="viewport" ref="viewport">
-      <ul class="interview" :style="transformQuestionItem">
-        <li class="item" v-for="(question, index) in questions" :key="index">
-          <div class="item-bag">
-            <em class="number">Q.{{index + 1}}</em>
-            <div class="question-bag">
-              <strong class="question">{{ question }}</strong>
-            </div>
-            <div class="answer-bag">
-              <input
-                type="radio"
-                v-model="responses[index]"
-                :id="`Q${index + 1}_O`"
-                :name="`Q${index + 1}`"
-                value="O">
-                <label
-                  class="answer"
-                  :for="`Q${index + 1}_O`">O</label>
-              <input
-                type="radio"
-                v-model="responses[index]"
-                :id="`Q${index + 1}_X`"
-                :name="`Q${index + 1}`"
-                value="X">
-                <label
-                  class="answer"
-                  :for="`Q${index + 1}_X`">X</label>
-            </div>
+  <div class="viewport" ref="viewport">
+    <ul class="interview" :style="transformQuestionItem">
+      <li class="item" v-for="(question, index) in questions" :key="index">
+        <div class="item-bag">
+          <em class="number">Q{{index + 1}}</em>
+          <div class="question-bag">
+            <strong class="question">{{ question }}</strong>
           </div>
-        </li>
-      </ul>
-      <pagination
-        :responses="responses"
-        :currentInterviewNumber="responseInterviewCount"
-        :interviewCount="questions.length" />
-    </div>
+          <div class="answer-bag">
+            <input
+              type="radio" value="O"
+              v-model="responses[index]"
+              :id="`Q${index + 1}_O`" :name="`Q${index + 1}`">
+              <label class="answer" :for="`Q${index + 1}_O`">O</label>
+            <input
+              type="radio" value="X"
+              v-model="responses[index]"
+              :id="`Q${index + 1}_X`" :name="`Q${index + 1}`">
+              <label class="answer" :for="`Q${index + 1}_X`">X</label>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <pagination
+      :responses="responses"
+      :currentInterviewNumber="responseInterviewCount"
+      :interviewCount="questions.length" />
   </div>
 </template>
 
@@ -82,17 +72,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  display: flex;
-  align-items: center;
-  height: inherit;
-  max-width: 600px;
-  padding: 0 30px;
-  margin: auto auto;
-  font-size: 1.2rem;
-  --main-point-color: rgb(188, 0, 0);
-}
-
 .viewport {
   overflow: hidden;
 }
@@ -118,6 +97,7 @@ export default {
 
 .number {
   display: block;
+  font-family: 'BMEULJIRO';
   text-align: center;
   font-size: 50px;
   color: var(--main-point-color);
@@ -130,8 +110,6 @@ export default {
   height: 30vh;
   max-height: 220px;
 }
-
-.question-pocket {}
 
 .question {
   padding-bottom: 3px;
@@ -148,9 +126,10 @@ export default {
 
 .answer {
   display: block;
+  font-family: 'BMEULJIRO';
   padding: 20px 30px;
   margin: 15px;
-  border: 1px solid var(--main-point-color);
+  border: 2px solid var(--main-point-color);
   color: var(--main-point-color);
   font-size: 2rem;
   border-radius: 10px;

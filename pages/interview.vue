@@ -11,18 +11,21 @@
             <input
               type="radio" value="O"
               v-model="responses[index]"
-              :id="`Q${index + 1}_O`" :name="`Q${index + 1}`">
+              :id="`Q${index + 1}_O`" :name="`Q${index + 1}`"
+              :disabled="isReadonly(index)">
               <label class="answer" :for="`Q${index + 1}_O`">O</label>
             <input
               type="radio" value="X"
               v-model="responses[index]"
-              :id="`Q${index + 1}_X`" :name="`Q${index + 1}`">
+              :id="`Q${index + 1}_X`" :name="`Q${index + 1}`"
+              :disabled="isReadonly(index)">
               <label class="answer" :for="`Q${index + 1}_X`">X</label>
           </div>
         </div>
       </li>
     </ul>
-    <pagination
+    <Pagination
+      class="pagination"
       :responses="responses"
       :currentInterviewNumber="responseInterviewCount"
       :interviewCount="questions.length" />
@@ -31,7 +34,7 @@
 
 <script>
 import SEX from '@/components/SEX.json'
-import Pagination from '@/components/Pagination.vue'
+import Pagination from '@/components/Pagination/Progress.vue'
 
 export default {
   components: {
@@ -48,17 +51,20 @@ export default {
     responseInterviewCount() {
       let count = this.responses.filter(answer => answer).length + 1
       count = count > this.questions.length ? this.questions.length : count
-      return count;
+      return count
     },
     transformQuestionItem() {
       if (!this.viewport) { return { transform: 'translate3d(0px, 0px, 0px)' } }
-      const calculatedTransform = (this.responseInterviewCount - 1) * this.viewport.width;
+      const calculatedTransform = (this.responseInterviewCount - 1) * this.viewport.width
       return { transform: `translate3d(-${calculatedTransform}px, 0px, 0px)`}
+    },
+    isReadonly() {
+      return (currentNumber) => currentNumber < this.responses.length
     }
   },
   mounted() {
-    this.viewport = this.$refs.viewport.getBoundingClientRect();
-    window.addEventListener('resize', this.resizeEvent);
+    this.viewport = this.$refs.viewport.getBoundingClientRect()
+    window.addEventListener('resize', this.resizeEvent)
   },
   methods: {
     resizeEvent() {
@@ -66,7 +72,7 @@ export default {
     }
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.resizeEvent);
+    window.removeEventListener('resize', this.resizeEvent)
   }
 }
 </script>
@@ -98,7 +104,7 @@ export default {
 
 .number {
   display: block;
-  font-family: 'BMEULJIRO';
+  font-family: BMEULJIRO;
   text-align: center;
   font-size: 50px;
   color: var(--main-point-color);
@@ -108,7 +114,7 @@ export default {
   position: relative;
   text-align: center;
   margin-top: 3vh;
-  height: 30vh;
+  height: 25vh;
   max-height: 220px;
 }
 
@@ -127,7 +133,7 @@ export default {
 
 .answer {
   display: block;
-  font-family: 'BMEULJIRO';
+  font-family: BMEULJIRO;
   padding: 20px 30px;
   margin: 15px;
   border: 2px solid var(--main-point-color);
@@ -135,9 +141,12 @@ export default {
   font-size: 2rem;
   border-radius: 10px;
   background-color: #fdfdfd;
-  &:hover {
-    background-color: var(--main-point-color);
-    color: #fff;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--main-point-color);
+      color: #fff;
+    }
   }
 }
 
@@ -148,5 +157,9 @@ input[type=radio] {
 input[type=radio]:checked + .answer {
   background-color: var(--main-point-color);
   color: #fff;
+}
+
+.pagination {
+  margin-top: 1vh;
 }
 </style>

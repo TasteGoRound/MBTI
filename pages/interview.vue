@@ -1,4 +1,5 @@
 <template>
+<div class="container">
   <div class="viewport" ref="viewport">
     <ul class="interview" :style="transformQuestionItem">
       <li class="item" v-for="(question, index) in questions" :key="index">
@@ -36,6 +37,7 @@
       :currentInterviewNumber="responseInterviewCount"
       :interviewCount="questions.length" />
   </div>
+</div>
 </template>
 
 <script>
@@ -98,6 +100,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  display: flex;
+  align-items: center;
+  height: inherit;
+  max-width: 600px;
+  padding: 0 30px;
+  margin: auto auto;
+  font-size: 1.2rem;
+  --main-point-color: rgb(188, 0, 0);
+}
+
 .viewport {
   overflow: hidden;
 }

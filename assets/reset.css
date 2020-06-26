@@ -50,6 +50,11 @@ table {
 html {
   height: 100%;
 }
+
 body, #__nuxt, #__layout {
   height: inherit;
+}
+
+* {
+  box-sizing: border-box;
 }

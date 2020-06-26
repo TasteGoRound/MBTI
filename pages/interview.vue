@@ -68,11 +68,7 @@ export default {
       return (currentNumber) => currentNumber < this.responses.length
     },
     fadeIn() {
-      return (currentNumber) => {
-        if (this.isReadonly(currentNumber)) {
-          return 'fade-in';
-        }
-      }
+      return (currentNumber) => this.isReadonly(currentNumber) ? 'fade-in' : ''
     }
   },
   mounted() {
@@ -173,7 +169,7 @@ input[type=radio] {
 
   &:not(:checked) + .fade-in {
     opacity: 0;
-    animation-name: fadeInOpacity;
+    animation-name: fadeIn;
     animation-iteration-count: 1;
     animation-timing-function: ease-in;
     animation-duration: 0.25s;
@@ -184,7 +180,7 @@ input[type=radio] {
   margin-top: 1vh;
 }
 
-@keyframes fadeInOpacity {
+@keyframes fadeIn {
 	0% {
 		opacity: 1;
 	}

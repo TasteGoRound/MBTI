@@ -82,6 +82,17 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeEvent)
+  },
+  watch: {
+    responses() {
+      if (this.responses.length >= this.questions.length) {
+        const positiveAnswers = this.responses.filter(response => response === 'O')
+        const _count = positiveAnswers.length
+        setTimeout(
+          () => this.$router.push(`/result/${_count}`), 500
+        )
+      }
+    }
   }
 }
 </script>

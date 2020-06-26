@@ -13,13 +13,19 @@
               v-model="responses[index]"
               :id="`Q${index + 1}_O`" :name="`Q${index + 1}`"
               :disabled="isReadonly(index)">
-              <label class="answer" :for="`Q${index + 1}_O`">O</label>
+              <label
+                class="answer"
+                :class="fadeIn(index)"
+                :for="`Q${index + 1}_O`">O</label>
             <input
               type="radio" value="X"
               v-model="responses[index]"
               :id="`Q${index + 1}_X`" :name="`Q${index + 1}`"
               :disabled="isReadonly(index)">
-              <label class="answer" :for="`Q${index + 1}_X`">X</label>
+              <label
+                class="answer"
+                :class="fadeIn(index)"
+                :for="`Q${index + 1}_X`">X</label>
           </div>
         </div>
       </li>
@@ -60,6 +66,13 @@ export default {
     },
     isReadonly() {
       return (currentNumber) => currentNumber < this.responses.length
+    },
+    fadeIn() {
+      return (currentNumber) => {
+        if (this.isReadonly(currentNumber)) {
+          return 'fade-in';
+        }
+      }
     }
   },
   mounted() {
@@ -152,14 +165,31 @@ export default {
 
 input[type=radio] {
   display: none;
-}
 
-input[type=radio]:checked + .answer {
-  background-color: var(--main-point-color);
-  color: #fff;
+  &:checked + .answer {
+    background-color: var(--main-point-color);
+    color: #fff;
+  }
+
+  &:not(:checked) + .fade-in {
+    opacity: 0;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.25s;
+  }
 }
 
 .pagination {
   margin-top: 1vh;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 </style>

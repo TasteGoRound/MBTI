@@ -14,7 +14,10 @@ $ npm run build
 $ npm run start
 
 # generate static project
-$ npm run generate
+$ npm run generate --publish=true
+
+# deploy project
+$ npm run deploy
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

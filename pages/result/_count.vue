@@ -10,6 +10,9 @@
     <h3 class="turning-point">[Turning Point]</h3>
     <strong class="turning-point-title">{{ result.turningPoint.title }}</strong>
     <p class="turning-point-contents" v-html="result.turningPoint.content"></p>
+    <a class="banner-link" href="http://www.badgirllifestyle.co.kr">
+      <img class="banner-image" src="@/static/BLS/images/banner100.png" width="100%" height="100%">
+    </a>
   </div>
 </div>
 </template>
@@ -99,5 +102,10 @@ export default {
   padding-bottom: 40px;
   text-align: center;
   font-weight: bold;
+}
+
+.banner-link {
+  display: block;
+  margin-top: 30px;
 }
 </style>

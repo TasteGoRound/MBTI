@@ -1,26 +1,58 @@
 <template>
   <div class="container">
-    <nuxt-link to="/result/MBTI">로딩 끝내기</nuxt-link>
+    <div class="viewport">
+      <div class="loading-symbol" v-html="symbol"></div>
+      <div class="loading-process" v-html="process"></div>
+    </div>
   </div>
 </template>
 
 <script>
+import SEX from '@/assets/1.SEX/SEX.js'
+
 export default {
+  asyncData() {
+    const responses = JSON.parse(localStorage.getItem('responses')) || null
+    let count = -1;
+    if (responses) {
+      count = responses.filter(response => response === 'O').length
+    }
+    return { count }
+  },
   data() {
     return {
-      moveToPage: null
+      count: 0,
+      symbol: SEX.loading.symbol,
+      process: SEX.loading.process,
+      moveEvent: null
     }
   },
   mounted() {
-    this.moveToPage = setTimeout(() => {
-      this.$router.push('/result/MBTI');
-    }, 3000);
+    let locationURL = '/'
+    if (this.count > -1) {
+      locationURL = `result/${this.count}`
+    }
+    this.moveEvent = setTimeout(() => this.$router.push(locationURL), 1234)
   },
-  destroyed() {
-    clearTimeout(this.moveToPage);
-  }
+  beforeDestroy() { clearTimeout(this.moveEvent) }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: inherit;
+  max-width: 600px;
+  padding: 0 30px;
+  margin: auto auto;
+  font-size: 1.2rem;
+  --main-point-color: rgb(188, 0, 0);
+}
+
+.viewport {
+  width: 100%;
+  max-width: 200px;
+}
 </style>

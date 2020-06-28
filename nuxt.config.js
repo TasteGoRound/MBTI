@@ -28,6 +28,7 @@ if(process.env.npm_config_publish) {
 
 export default {
   mode: 'spa',
+  loading: false,
   head: {
     title: process.env.npm_package_name || '',
     meta: [

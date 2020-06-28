@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import SEX from '@/components/SEX.json'
+import SEX from '@/assets/1.SEX/SEX.js'
 import Pagination from '@/components/Pagination/Progress.vue'
 
 export default {
@@ -52,50 +52,41 @@ export default {
     return {
       responses: [],
       questions: SEX.questions,
-      viewport: null
+      viewport: null,
+      moveEvent: null
+    }
+  },
+  methods: {
+    onResize() { this.viewport = this.$refs.viewport.getBoundingClientRect() },
+    process() {
+      localStorage.setItem('responses', JSON.stringify(this.responses))
+      if (this.responses.length >= this.questions.length) {
+        this.moveEvent = setTimeout(() => this.$router.push('loading'), 500)
+      }
     }
   },
   computed: {
-    responseInterviewCount() {
-      let count = this.responses.filter(answer => answer).length + 1
-      count = count > this.questions.length ? this.questions.length : count
-      return count
-    },
+    responseInterviewCount() { return this.responses.filter(answer => answer).length },
     transformQuestionItem() {
       if (!this.viewport) { return { transform: 'translate3d(0px, 0px, 0px)' } }
-      const calculatedTransform = (this.responseInterviewCount - 1) * this.viewport.width
+      const responseCount = this.responseInterviewCount < this.questions.length ? this.responseInterviewCount : this.questions.length - 1;
+      const calculatedTransform = responseCount * this.viewport.width
+
       return { transform: `translate3d(-${calculatedTransform}px, 0px, 0px)`}
     },
-    isReadonly() {
-      return (currentNumber) => currentNumber < this.responses.length
-    },
-    fadeIn() {
-      return (currentNumber) => this.isReadonly(currentNumber) ? 'fade-in' : ''
-    }
+    isReadonly() { return (currentNumber) => currentNumber < this.responses.length },
+    fadeIn() { return (currentNumber) => this.isReadonly(currentNumber) ? 'fade-in' : '' }
   },
+  beforeCreate() { localStorage.clear() },
   mounted() {
     this.viewport = this.$refs.viewport.getBoundingClientRect()
-    window.addEventListener('resize', this.resizeEvent)
-  },
-  methods: {
-    resizeEvent() {
-      this.viewport = this.$refs.viewport.getBoundingClientRect()
-    }
+    window.addEventListener('resize', this.onResize)
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.resizeEvent)
+    window.removeEventListener('resize', this.onResize)
+    clearTimeout(this.moveEvent)
   },
-  watch: {
-    responses() {
-      if (this.responses.length >= this.questions.length) {
-        const positiveAnswers = this.responses.filter(response => response === 'O')
-        const _count = positiveAnswers.length
-        setTimeout(
-          () => this.$router.push(`/result/${_count}`), 500
-        )
-      }
-    }
-  }
+  watch: { responses: 'process' }
 }
 </script>
 

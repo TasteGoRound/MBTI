@@ -5,7 +5,7 @@
     <h2 class="result">
       당신의 남자친구가 성적으로 만족할 확률은<br>
       <em class="result-probability">{{ result.title }}%</em> 입니다.</h2>
-    <div class="result-visualization"></div>
+    <div class="result-visualization" v-html="result.symbol"></div>
     <p class="result-contents" v-html="result.content"></p>
     <h3 class="turning-point">[Turning Point]</h3>
     <strong class="turning-point-title">{{ result.turningPoint.title }}</strong>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import SEX from '@/components/SEX.json'
+import SEX from '@/assets/1.SEX/SEX.js'
 
 export default {
   validate({ params }) {
@@ -24,6 +24,7 @@ export default {
     const isOverMinus = parsedNumber > 0
     const isUnderMaxCount = parsedNumber <= SEX.questions.length
     const isValidate = isNumber && isOverMinus && isUnderMaxCount
+
     return isValidate
   },
   asyncData(app) {
@@ -40,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   display: flex;
-  max-width: 600px;
+  max-width: 500px;
   padding: 0 30px;
   margin: auto auto;
   font-size: 1.2rem;
@@ -54,12 +55,14 @@ export default {
 .promotion-title {
   padding: 20px 0 40px 0;
   text-align: center;
+  font-weight: bold;
 }
 
 .result {
-  font-size: 1rem;
   line-height: 2rem;
   text-align: center;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .result-probability {
@@ -76,22 +79,25 @@ export default {
 }
 
 .result-visualization {
-  margin-top: 20px;
+  width: 7rem;
+  margin: 30px auto;
 }
 
 .result-contents, .turning-point-contents {
-  font-size: 15px;
   line-height: 20px;
+  font-size: 15px;
 }
 
 .turning-point {
+  padding: 40px 0 15px 0;
   text-align: center;
-  padding: 20px 0;
+  font-weight: bold;
 }
 
 .turning-point-title {
   display: block;
+  padding-bottom: 40px;
   text-align: center;
-  padding: 10px 0 40px 0;
+  font-weight: bold;
 }
 </style>

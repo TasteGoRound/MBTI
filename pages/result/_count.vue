@@ -11,7 +11,7 @@
     <strong class="turning-point-title">{{ result.turningPoint.title }}</strong>
     <p class="turning-point-contents" v-html="result.turningPoint.content"></p>
     <a class="banner-link" href="http://www.badgirllifestyle.co.kr">
-      <img class="banner-image" src="@/static/BLS/images/banner100.png" width="100%" height="100%">
+      <img class="banner-image" src="@/static/BLS/images/banner50.png" width="100%" height="100%">
     </a>
   </div>
 </div>

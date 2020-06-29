@@ -3,7 +3,7 @@ let publish = null;
 if(process.env.npm_config_publish) {
   publish = {
     router: {
-      base: '/MBTI/'
+      base: '/S/'
     },
     generate: {
       routes: [

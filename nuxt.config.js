@@ -40,6 +40,9 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  plugins: [
+    { src: '~plugins/ga.js', mode: 'client' }
+  ],
   css: [ '@/assets/reset.css' ],
   ...publish
 }

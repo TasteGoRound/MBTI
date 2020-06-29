@@ -9,7 +9,7 @@ export default {
   head () {
     return {
       meta: [
-        { hid: 'og:image', property: 'og:image', content: ogImage }
+        { hid: 'og:image', property: 'og:image', content: location.host + ogImage }
       ]
     }
   }

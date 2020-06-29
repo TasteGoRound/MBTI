@@ -2,7 +2,7 @@
   <div class="container">
     <div class="viewport">
       <div class="loading-symbol" v-html="symbol"></div>
-      <div class="loading-process" v-html="process"></div>
+      <div class="loading-process">남친의 성 만족도<br>분석 중</div>
     </div>
   </div>
 </template>
@@ -54,5 +54,13 @@ export default {
 .viewport {
   width: 100%;
   max-width: 200px;
+}
+
+.loading-process {
+  margin-top: 50px;
+  text-align: center;
+  font-family: BMEULJIRO;
+  font-size: 30px;
+  line-height: 40px;
 }
 </style>

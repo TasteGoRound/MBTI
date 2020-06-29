@@ -92,6 +92,7 @@ export default {
 }
 
 .turning-point {
+  color: #ad0712;
   padding: 40px 0 15px 0;
   text-align: center;
   font-weight: bold;

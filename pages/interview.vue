@@ -42,7 +42,7 @@
 
 <script>
 import SEX from '@/assets/1.SEX/SEX.js'
-import Pagination from '@/components/Pagination/Progress.vue'
+import Pagination from '@/components/Pagination/Circle.vue'
 
 export default {
   components: {
@@ -193,14 +193,5 @@ input[type=radio] {
 
 .pagination {
   margin-top: 1vh;
-}
-
-@keyframes fadeIn {
-	0% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="pagination">
+    <div class="pagination-numbering">{{ currentInterviewNumber }} / {{ interviewCount }}</div>
     <div class="progress-select-ox">
       <div
         v-for="(response, index) in new Array(interviewCount)"
@@ -22,12 +23,7 @@ export default {
       return { width: `${this.currentInterviewNumber / this.interviewCount * 100}%` }
     },
     light() {
-      return (index) => {
-        if (this.responses[index]) {
-          return this.responses[index] === 'O' ? 'green' : 'red'
-        }
-        return '';
-      }
+      return (index) => this.responses[index] ? 'red' : ''
     }
   }
 }
@@ -35,15 +31,14 @@ export default {
 
 <style lang="scss" scoped>
   .pagination {
-    margin-top: 3vh;
-    height: 20px;
-    padding: 0 20px;
-    --color-red-light: #f00;
+    padding: 0 25px;
+    --color-red-light: #ad0712;
   }
 
   .progress-select-ox {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-top: 10px;
 
     .light{
       display: inline-block;
@@ -67,13 +62,19 @@ export default {
       &.red {
         z-index: 20;
         background: var(--color-red-light);
-        box-shadow: 0 0 0 1px rgba(255, 0, 0, .2),
-            0 0 2px rgba(255, 0, 0, 1),
-            0 0 4px rgba(255, 0, 0, 1),
-            0 0 8px rgba(255, 0, 0, 1),
-            0 0 16px rgba(255, 0, 0, 1);
+        // box-shadow: 0 0 0 1px rgba(255, 0, 0, .2),
+        //     0 0 1px var(--color-red-light),
+        //     0 0 2px var(--color-red-light),
+        //     0 0 4px var(--color-red-light),
+        //     0 0 8px var(--color-red-light);
       }
     }
+  }
+
+  .pagination-numbering {
+    font-family: BMEULJIRO;
+    text-align: right;
+    color: rgba(0, 0, 0, .5);
   }
 
 @keyframes flash{

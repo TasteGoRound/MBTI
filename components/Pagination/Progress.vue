@@ -1,8 +1,6 @@
 <template>
   <div class="pagination">
-    <div class="pagination-numbering">
-      {{ currentInterviewNumber }} / {{ interviewCount }}
-    </div>
+    <div class="pagination-numbering">{{ currentInterviewNumber }} / {{ interviewCount }}</div>
     <div class="pagination-progress-background">
       <div class="pagination-progress-bar" :style="progressWidth"></div>
     </div>

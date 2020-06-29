@@ -9,11 +9,7 @@ export default {
   head () {
     return {
       meta: [
-        { property: 'og:image', content: '//' + location.host + ogImage },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:site_name', content: 'BADGIRLS LIFE STYLE' },
-        { property: 'og:title', content: 'BADGIRLS LIFE STYLE' },
-        { property: 'og:description', content: '매력의 격이 다른 "배드걸 라이프 스타일"' }
+        { property: 'image', content: '//' + location.host + ogImage }
       ]
     }
   }

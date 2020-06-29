@@ -32,7 +32,7 @@ export default {
   mounted() {
     let locationURL = '/'
     if (this.count > -1) {
-      locationURL = `result/${this.count}`
+      locationURL = `/result/${this.count}`
     }
     this.moveEvent = setTimeout(() => this.$router.push(locationURL), 1234)
   },

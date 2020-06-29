@@ -1,5 +1,3 @@
-import ogImage from '@/static/BLS/images/og.png';
-
 let publish = null;
 
 if(process.env.npm_config_publish) {
@@ -36,8 +34,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
-      { hid: 'og:image', property: 'og:image', content: this.BASE_URL+ ogImage }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

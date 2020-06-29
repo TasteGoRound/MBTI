@@ -36,6 +36,8 @@ export default {
       { hid: 'og:site_name', property: 'og:site_name', content: 'BADGIRLS LIFE STYLE' },
       { hid: 'og:title', property: 'og:title', content: 'BADGIRLS LIFE STYLE' },
       { hid: 'og:description', property: 'og:description', content: '매력의 격이 다른 "배드걸 라이프 스타일"' },
+      { hid: 'og:image', property: 'og:image', content: 'https://k.kakaocdn.net/dn/edxOqX/btqFctp5Uz4/87oz6bLEWcAVk3hAdiDC81/img.png' },
+      { hid: 'og:image:width', property: 'og:image:width', content: '800' },
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '당신의 남자친구의 성적 만족도는?' }

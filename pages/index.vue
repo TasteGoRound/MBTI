@@ -6,7 +6,7 @@
       </header>
       <main>
         <strong class="start_symbol" v-html="symbol"></strong>
-        <nuxt-link class="start_interview" to="/interview">연애 능력치 알아보기</nuxt-link>
+        <nuxt-link class="start_interview" to="/interview">남자친구 속 마음 알아보러 가기!</nuxt-link>
       </main>
     </div>
   </div>
@@ -51,24 +51,23 @@ main {
 }
 
 .start_symbol {
-  width: 50vw;
-  margin: 0 auto;
-}
-
-.start_symbol {
   display: block;
 }
 
 .start_interview {
   display: block;
-  font-size: 2.25vw;
-  padding: 3vw 20px;
+  font-size: 18px;
+  padding: 20px 15px;
   text-align: center;
-  background: red;
+  background: #ad0712;
   color: #fff;
   text-decoration: none;
   border-radius: 60px;
   margin: 0 auto;
   margin-top: 40px;
+
+  @media screen and (max-width: 340px) {
+    font-size: 16px;
+  }
 }
 </style>

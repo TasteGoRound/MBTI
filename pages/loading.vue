@@ -17,6 +17,8 @@ export default {
     if (responses) {
       count = responses.filter(response => response === 'O').length
     }
+
+    count = count === 0 ? 1 : count
     return { count }
   },
   data() {

@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   /*
   ** 현재 페이지를 설정
   */
-  ga('create', 'UA-171146924-1', 'auto')
+  ga('create', 'UA-171148107-1', 'auto')
 }
 
 export default ({ app: { router }, store }) => {

@@ -66,7 +66,7 @@ main {
   margin: 0 auto;
   margin-top: 40px;
 
-  @media screen and (max-width: 340px) {
+  @media screen and (max-width: 355px) {
     font-size: 16px;
   }
 }

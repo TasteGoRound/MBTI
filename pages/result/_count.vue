@@ -64,8 +64,12 @@ export default {
 .result {
   line-height: 2rem;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 16px;
   font-weight: bold;
+
+  @media screen and (max-width: 355px) {
+    font-size: 14px;
+  }
 }
 
 .result-probability {

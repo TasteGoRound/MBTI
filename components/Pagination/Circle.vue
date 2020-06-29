@@ -62,11 +62,6 @@ export default {
       &.red {
         z-index: 20;
         background: var(--color-red-light);
-        // box-shadow: 0 0 0 1px rgba(255, 0, 0, .2),
-        //     0 0 1px var(--color-red-light),
-        //     0 0 2px var(--color-red-light),
-        //     0 0 4px var(--color-red-light),
-        //     0 0 8px var(--color-red-light);
       }
     }
   }
